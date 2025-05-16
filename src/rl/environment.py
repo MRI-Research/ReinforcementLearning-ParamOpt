@@ -56,4 +56,5 @@ class MRIEnv:
         if outside:
             reward *= 0.5
         done = (tr_ == self.tr0 and te_ == self.te0)
+        self.state = (tr_, te_)
         return self.state, reward, done
