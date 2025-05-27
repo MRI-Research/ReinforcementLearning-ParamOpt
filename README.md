@@ -1,11 +1,11 @@
 ## Info
 
-This project implements a RL approach to optimize MRI parameters using Q-learning. The goal is to recover the optimal parameters that yield the best image quality based on the Structural Similarity Index (SSIM).
+This project implements a RL approach to optimize MRI parameters using Q-learning. The goal is to recover the optimal parameters based on image quality and parameter stability.
 
 ## Features
 - **Custom Reinforcement Learning Environment**: Simulates MRI parameter optimization using the `MRIEnv` class benefiting from spin-echo equations.
 - **Q-Learning Implementation**: Learns the optimal policy for parameter optimization.
-- **SSIM-Based Rewards**: Evaluates image quality using the SSIM.
+- **Image Processing:** Converts to images with an inverse FFT and root-sum-of-squares reconstruction.
 - **Modular Design**: Organized into reusable modules for better maintainability, current version is for [FastMRI Knee](https://fastmri.med.nyu.edu/).
 
 ## Getting Started
@@ -28,13 +28,13 @@ $ python src/main.py
 
 
 ## Directory  Structure
-```
+<pre>
 src/
-├── main.py            # Entry point for the application
+├── <a href="https://github.com/MRI-Research/ReinforcementLearning-ParamOpt/blob/main/src/main.py">main.py</a>          # Entry point for the application
 ├── rl/
-│   ├── environment.py # Defines the MRIEnv class
-│   └── q_learning.py  # Implements the Q‑learning algorithm
+│   ├── <a href="https://github.com/MRI-Research/ReinforcementLearning-ParamOpt/blob/main/src/rl/environment.py">environment.py</a>  # Defines the MRIEnv class
+│   └── <a href="https://github.com/MRI-Research/ReinforcementLearning-ParamOpt/blob/main/src/rl/q_learning.py">q_learning.py</a>   # Implements the Q-learning algorithm
 └── utils/
-    ├── image_processing.py # Image processing utilities
-    └── xml_parsing.py      # XML header parsing utilities
-```
+    ├── <a href="https://github.com/MRI-Research/ReinforcementLearning-ParamOpt/blob/main/src/utils/image_processing.py">image_processing.py</a> # Image processing utilities
+    └── <a href="https://github.com/MRI-Research/ReinforcementLearning-ParamOpt/blob/main/src/utils/xml_parsing.py">xml_parsing.py</a>      # XML header parsing utilities
+</pre>
