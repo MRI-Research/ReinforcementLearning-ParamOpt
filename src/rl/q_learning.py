@@ -1,24 +1,23 @@
 import numpy as np
-import json
 import torch
 
-def q_learn(env, episodes=250,  device='cpu'):
+def q_learn(env, episodes=1000, steps=100, device='cpu'):
     alpha=0.1 
     gamma=0.95
     eps_start=1.0 
     eps_end=0.1 
-    eps_decay=0.9995
+    eps_decay=0.99
     
     Q = {}
-    eps = eps_start
     rewards = []
     device = torch.device(device)
     
     for ep in range(episodes):
         s = env.reset()
+        eps = eps_start
         total_r = 0
-        kk=500
-        for it in range(kk):
+        
+        for it in range(steps):
             if s not in Q: 
                 Q[s] = torch.zeros(len(env.actions), device=device, dtype=torch.float32)
             
@@ -30,7 +29,7 @@ def q_learn(env, episodes=250,  device='cpu'):
             next_s, r, done = env.step(a)
             total_r += r
             
-            print(f"Episode {ep+1}/{episodes}, Iteration {it+1}/{kk}")
+            print(f"Episode {ep+1}/{episodes}, Iteration {it+1}/{steps}")
             if next_s not in Q:
                 Q[next_s] = torch.zeros(len(env.actions), device=device, dtype=torch.float32)
             

@@ -6,7 +6,6 @@ from utils.log_rl import setup_logger
 import h5py
 import torch
 import numpy as np
-import matplotlib.pyplot as plt
 from pathlib import Path
 
 def main(use_gpu):
@@ -14,7 +13,6 @@ def main(use_gpu):
     root_dir = Path("")  # Path to FastMRI knee dataset
     file_list = sorted([f for f in root_dir.glob("*.h5")])
 
-    
     logger = setup_logger('rl_knee_parameters.log')
     logger.info("Starting Q-learning runs on FastMRI knee dataset")
     results, all_rewards, file_it = [], [], 0
@@ -32,7 +30,7 @@ def main(use_gpu):
             
             ref_imgs = rss_ifft_all_slices(ksp)
             env = MRIEnv(ref_imgs, tr0, te0, T1c, T2c,device)
-            Q, rews = q_learn(env, episodes=250, device=device)
+            Q, rews = q_learn(env, episodes=10, steps=100, device=device)
             all_rewards.append(rews)
             logger.info("Completed Q-learning: max reward=%.4f", max(rews))
 
